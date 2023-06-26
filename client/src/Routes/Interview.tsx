@@ -37,24 +37,27 @@ export default function Interview() {
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
     //to delay the loading of the avatar 
-    const [isUserWebCamLoaded, setIsUserWebCamLoaded] = useState(false);
-    const handleUserWebCamLoaded = () => {
+  const [isUserWebCamLoaded, setIsUserWebCamLoaded] = useState(false);
+  const handleUserWebCamLoaded = () => {
       setTimeout(() => {
         setIsUserWebCamLoaded(true);
       }, 3000);
     };
+  
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
   }, [conversation]);
+  
   const handleFormSubmit = async (values: InterviewFormValues) => {
     setFormValues(values);
     setFormSubmitted(true);
     setShowInterviewForm(false);
     await newInterview(values);
   };
+  
   const newInterview = async (values: InterviewFormValues) => {
     setIsInterviewerSpeaking(true);
     const res = await ApiService.createInterview(
@@ -71,6 +74,7 @@ export default function Interview() {
       await getQuestion(res._id, values);
     }
   };
+  
   const getQuestion = async (id: string, values: InterviewFormValues) => {
     const res = await ApiService.retrieveQuestion({
       id: id,
@@ -83,6 +87,7 @@ export default function Interview() {
       nextQuestion(res, values);
     }
   };
+  
   const nextQuestion = (res: string, values: InterviewFormValues) => {
     console.log("res in next question", res);
     if (values.video === true) {
@@ -95,6 +100,7 @@ export default function Interview() {
       setIsInterviewerSpeaking(false);
     }
   };
+  
   const endInterview = async (res: string, formValues: InterviewFormValues) => {
     try {
       setIsLoading(true);
@@ -113,6 +119,7 @@ export default function Interview() {
       console.log(error);
     }
   };
+  
   const saveUserResponse = async (audioUrl: string, transcript: string) => {
     try {
       if (!audioUrl) {
@@ -138,6 +145,7 @@ export default function Interview() {
       console.log(error);
     }
   };
+  
   return (
     <>
       <div className="h-screen w-screen bg-seasalt">
