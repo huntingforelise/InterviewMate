@@ -1,4 +1,4 @@
-Interview.tsx
+
 import { useContext, useEffect, useRef } from "react";
 import { Context } from "../Context";
 import Navbar from "../Components/Navbar";
@@ -12,7 +12,8 @@ import AvatarWebCam from "../Components/Interview/AvatarWebCam";
 import InterviewFeedback from "../Components/InterviewFeedback";
 import MrBPrep from "../Assets/MrBPrep.png";
 import Spinner from "../Components/Spinner";
-import { all } from "q";
+// import { all } from "q";
+
 export default function Interview() {
   const { currentUser } = useContext(Context) as any;
   console.log(currentUser);
